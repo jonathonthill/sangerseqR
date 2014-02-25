@@ -1,0 +1,36 @@
+\docType{class}
+\name{abif-class}
+\alias{abif}
+\alias{abif-class}
+\title{ABIF Class Objects}
+\description{
+S4 object returned by \code{\link{read.abif}} containing
+all fields in the ABIF file format (see
+\url{http://home.appliedbiosystems.com/support/software_community/
+ABIF_File_Format.pdf}). Data fields vary by machine and
+basecaller versions. Must be converted to
+\code{\link{sangerseq}} to be used in other functions from
+this package.
+}
+\section{Slots}{
+
+\describe{
+\item{\code{header}}{Header information from the file.}
+
+\item{\code{directory}}{Directory information from file containing field names and
+  information for reading binary data.}
+
+\item{\code{data}}{List object containing all data fields and values in file.
+  Included fields vary by machine and basecaller versions.}
+}}
+\examples{
+hetab1 <- read.abif(system.file("extdata",
+                                "heterozygous.ab1",
+                                package = "sangerseqR"))
+str(hetab1)
+}
+\seealso{
+\code{\link{read.abif}}, \code{\link{scf}},
+\code{\link{sangerseq}}
+}
+

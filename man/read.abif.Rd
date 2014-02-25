@@ -1,0 +1,40 @@
+\name{read.abif}
+\alias{read.abif}
+\title{Read ABIF Files}
+\usage{
+read.abif(filename)
+}
+\arguments{
+  \item{filename}{Location of the file.}
+}
+\value{
+\code{\link{abif}} s4 object
+}
+\description{
+Reads ABIF sanger sequencing data files. ABIF files are a
+proprietary binary sanger sequencing chromatogram data file
+created by Applied Biosystems (see
+\url{http://home.appliedbiosystems.com/support/software_community/
+ABIF_File_Format.pdf}). The file is read and parsed into an
+\code{\link{abif}} class object. This method is based on
+the read.abif function in the seqinr package available on
+CRAN.
+}
+\examples{
+hetab1 <- read.abif(system.file("extdata",
+                                "heterozygous.ab1",
+                                package = "sangerseqR"))
+str(hetab1)
+}
+\references{
+Charif, D. and Lobry, J.R. (2007) SeqinR 1.0-2: a
+contributed package to teh R project for statistical
+computing devoted to biological sequences retrieval and
+analysis. Structural approches to sequenc eevolution:
+Molecules, networks, populations. pp. 207-232.
+}
+\seealso{
+\code{\link{read.scf}}, \code{\link{readsangerseq}},
+\code{\link{abif}}
+}
+

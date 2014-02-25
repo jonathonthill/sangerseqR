@@ -1,0 +1,44 @@
+\docType{class}
+\name{scf-class}
+\alias{scf}
+\alias{scf-class}
+\title{Scf Class Objects}
+\description{
+S4 object returned by \code{\link{read.scf}} containing all
+fields in the SCF file format (see
+\url{http://staden.sourceforge.net/manual/formats_unix_2.html}).
+Must be converted to \code{\link{sangerseq}} to be used in
+other functions from this package.
+}
+\section{Slots}{
+
+\describe{
+\item{\code{header}}{Header information from the file.}
+
+\item{\code{sample_points}}{Trace data matrix (Order = A, C, G, T).}
+
+\item{\code{sequence_probs}}{Matrix of the relative probabilities for each base at
+  each position (Order = A, C, G, T).}
+
+\item{\code{basecall_positions}}{Vector containing trace matrix indices for each
+  basecall.}
+
+\item{\code{basecalls}}{\code{\link[Biostrings]{DNAString}} object containing the
+  basecalls.}
+
+\item{\code{comments}}{String containing any comments in the file.}
+
+\item{\code{private}}{Raw binary data containing any private data in the file.
+  Generally not used.}
+}}
+\examples{
+homoscf <- read.scf(system.file("extdata",
+                                "homozygous.scf",
+                                package = "sangerseqR"))
+str(homoscf)
+}
+\seealso{
+\code{\link{read.scf}}, \code{\link{abif}},
+\code{\link{sangerseq}}
+}
+
