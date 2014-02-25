@@ -1,0 +1,115 @@
+\docType{methods}
+\name{primarySeqID}
+\alias{peakAmpMatrix}
+\alias{peakAmpMatrix,sangerseq-method}
+\alias{peakAmpMatrix<-}
+\alias{peakAmpMatrix<-,sangerseq-method}
+\alias{peakPosMatrix}
+\alias{peakPosMatrix,sangerseq-method}
+\alias{peakPosMatrix<-}
+\alias{peakPosMatrix<-,sangerseq-method}
+\alias{primarySeq}
+\alias{primarySeq,sangerseq-method}
+\alias{primarySeq<-}
+\alias{primarySeq<-,sangerseq-method}
+\alias{primarySeqID}
+\alias{primarySeqID,sangerseq-method}
+\alias{primarySeqID<-}
+\alias{primarySeqID<-,sangerseq-method}
+\alias{secondarySeq}
+\alias{secondarySeq,sangerseq-method}
+\alias{secondarySeq<-}
+\alias{secondarySeq<-,sangerseq-method}
+\alias{secondarySeqID}
+\alias{secondarySeqID,sangerseq-method}
+\alias{secondarySeqID<-}
+\alias{secondarySeqID<-,sangerseq-method}
+\alias{traceMatrix}
+\alias{traceMatrix,sangerseq-method}
+\alias{traceMatrix<-}
+\alias{traceMatrix<-,sangerseq-method}
+\title{Sangerseq Accessor Functions}
+\usage{
+primarySeqID(obj)
+
+primarySeqID(obj) <- value
+
+primarySeq(obj, string = FALSE)
+
+primarySeq(obj) <- value
+
+secondarySeqID(obj)
+
+secondarySeqID(obj) <- value
+
+secondarySeq(obj, string = FALSE)
+
+secondarySeq(obj) <- value
+
+traceMatrix(obj)
+
+traceMatrix(obj) <- value
+
+peakPosMatrix(obj)
+
+peakPosMatrix(obj) <- value
+
+peakAmpMatrix(obj)
+
+peakAmpMatrix(obj) <- value
+
+\S4method{primarySeq}{sangerseq}(obj, string = FALSE)
+
+\S4method{secondarySeq}{sangerseq}(obj, string = FALSE)
+
+\S4method{traceMatrix}{sangerseq}(obj)
+
+\S4method{peakPosMatrix}{sangerseq}(obj)
+
+\S4method{peakAmpMatrix}{sangerseq}(obj)
+
+\S4method{primarySeqID}{sangerseq}(obj)
+
+\S4method{secondarySeqID}{sangerseq}(obj)
+
+\S4method{primarySeq}{sangerseq}(obj) <- value
+
+\S4method{secondarySeq}{sangerseq}(obj) <- value
+
+\S4method{traceMatrix}{sangerseq}(obj) <- value
+
+\S4method{peakPosMatrix}{sangerseq}(obj) <- value
+
+\S4method{peakAmpMatrix}{sangerseq}(obj) <- value
+
+\S4method{primarySeqID}{sangerseq}(obj) <- value
+
+\S4method{secondarySeqID}{sangerseq}(obj) <- value
+}
+\arguments{
+  \item{obj}{sangerseq object to be manipulated}
+
+  \item{string}{TRUE/FALSE. FALSE (default) returns a
+  \code{\link{DNAString}} class object. TRUE returns the
+  DNA sequence as a character string.}
+
+  \item{value}{The value to set the slot to.}
+}
+\description{
+Accessor Functions allow the user to retrieve results from
+and assign values to \code{\link{sangerseq-class}} objects.
+}
+\examples{
+hetsangerseq <- readsangerseq(system.file("extdata",
+                                          "heterozygous.ab1",
+                                          package = "sangerseqR"))
+primarySeq(hetsangerseq)
+secondarySeq(hetsangerseq, string=TRUE)
+primarySeqID(hetsangerseq)
+primarySeqID(hetsangerseq) <- "Some string"
+primarySeqID(hetsangerseq)
+}
+\seealso{
+\code{\link{sangerseq-class}}
+}
+

@@ -1,0 +1,31 @@
+\name{read.scf}
+\alias{read.scf}
+\title{Read Scf Files}
+\usage{
+read.scf(filename)
+}
+\arguments{
+  \item{filename}{Location of the file.}
+}
+\value{
+\code{\link{scf}} s4 object
+}
+\description{
+Reads Scf sanger sequencing data files. Scf files are an
+open source binary sanger sequencing chromatogram data file
+(see
+\url{http://staden.sourceforge.net/manual/formats_unix_2.html}).
+The file is read and parsed into an \code{\link{scf}} class
+object.
+}
+\examples{
+homoscf <- read.scf(system.file("extdata",
+                                "homozygous.scf",
+                                package = "sangerseqR"))
+str(homoscf)
+}
+\seealso{
+\code{\link{read.abif}}, \code{\link{readsangerseq}},
+\code{\link{scf}}
+}
+

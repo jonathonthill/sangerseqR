@@ -1,0 +1,66 @@
+\docType{methods}
+\name{setAllelePhase}
+\alias{setAllelePhase}
+\alias{setAllelePhase,sangerseq-method}
+\title{Set Reference and Alternate Alleles}
+\usage{
+setAllelePhase(obj, refseq, trim5 = 0, trim3 = 0)
+
+\S4method{setAllelePhase}{sangerseq}(obj, refseq, trim5 = 0, trim3 = 0)
+}
+\arguments{
+  \item{obj}{\code{\link{sangerseq}} class object}
+
+  \item{refseq}{DNAString for character string of reference
+  allele sequence.}
+
+  \item{trim5}{Number of bases to trim from the beginning
+  of the sequence.}
+
+  \item{trim3}{Number of bases to trim from the end of the
+  sequence.}
+}
+\value{
+A \code{\link{sangerseq}} object with the Reference Allele
+in the primarySeq slot and the Alternate Allele in the
+secondarySeq slot.
+}
+\description{
+Parses the Primary and Secondary Sequences into Reference
+and Alternate Alleles
+}
+\details{
+When multiple heterozygous basecalls are made, it is
+generally unclear which calls are in phase with each other.
+This function takes a reference sequence for one of the
+alleles to match the primary and secondary basecalls as
+reference or alternate allele.
+}
+\examples{
+#Load Sequences
+hetsangerseq <- readsangerseq(system.file("extdata",
+                                          "heterozygous.ab1",
+                                          package = "sangerseqR"))
+homosangerseq <- readsangerseq(system.file("extdata",
+                                           "homozygous.scf",
+                                           package = "sangerseqR"))
+#Make calls on heterozygous sequence to be parsed
+hetcalls <- makeBaseCalls(hetsangerseq, ratio = 0.33)
+#Need a reference sequence to set phase. Can get from annotation
+#(e.g. Refseq) or another sanger sequencing file
+ref <- subseq(primarySeq(homosangerseq, string = TRUE),
+              start = 30,
+              width = 500)
+#Set the phase
+hetseqalleles <- setAllelePhase(hetcalls, ref, trim5 = 50, trim3 = 100)
+#Align to compare alleles
+pa <- pairwiseAlignment(primarySeq(hetseqalleles),
+                                   secondarySeq(hetseqalleles),
+                                   type = "global-local")
+writePairwiseAlignments(pa)
+}
+\seealso{
+\code{\link{makeBaseCalls}}, \code{\link{chromatogram}},
+\code{\link{sangerseq}}
+}
+
