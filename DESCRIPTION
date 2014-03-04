@@ -1,7 +1,7 @@
 Package: sangerseqR
 Type: Package
 Title: Tools for Sanger Sequencing Data in R
-Version: 0.99.7
+Version: 0.99.8
 Date: 2014-02-13
 Author: Jonathon T. Hill, Bradley Demarest
 Maintainer: Jonathon Hill <jhill@genetics.utah.edu>
@@ -13,6 +13,6 @@ Description: This package contains several tools for analyzing Sanger
         Sequencing data files in R, including reading .scf and .ab1
         files, making basecalls and plotting chromatograms.
 License: GPL-2
-biocViews: Bioinformatics,Sequencing,SNP,Visualization
 Collate: AllClasses.R AllGenerics.R UnExportedFunctions.R
         ReadFileFunctions.R sangerseqmethods.R
+biocViews: Sequencing, SNP, Visualization
