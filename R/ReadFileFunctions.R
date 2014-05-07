@@ -43,7 +43,7 @@ read.scf <- function (filename)
   res@header@bases_offset <- SInt32(rawdata[25:28])
   res@header@comments_size <- SInt32(rawdata[29:32])
   res@header@comments_offset <- SInt32(rawdata[33:36])
-  res@header@version <- as.numeric(RTC(rawdata[37:40]))
+  res@header@version <- RTC(rawdata[37:40])
   res@header@sample_size <- SInt32(rawdata[41:44])
   res@header@code_set <- SInt32(rawdata[45:48])
   res@header@private_size <- SInt32(rawdata[49:52])
@@ -62,50 +62,29 @@ read.scf <- function (filename)
   private_end <- res@header@private_offset + res@header@private_size
    
   #Get Trace Data
-  if(res@header@version > 2.9) {
-    rawSamples <- matrix(SInt16(rawdata[samples_start:samples_end]), ncol=4, 
-                         byrow=FALSE)
-    res@sample_points <- apply(rawSamples, 2, convertPoints)
-  } else {
-    res@sample_points <- matrix(SInt16(rawdata[samples_start:samples_end]), ncol=4, 
-                                byrow=TRUE)
-  }
+  rawSamples <- matrix(SInt16(rawdata[samples_start:samples_end]), ncol=4, 
+                       byrow=FALSE)
+  res@sample_points <- apply(rawSamples, 2, convertPoints)
   
   #Get Basecall data
   rawBases <- rawdata[bases_start:bases_end]
   numBases <- res@header@bases
+  pos_end <- numBases*4
+  A_end <- pos_end + numBases
+  C_end <- A_end + numBases
+  G_end <- C_end + numBases
+  T_end <- G_end + numBases
+  Call_end <- T_end + numBases
+  res@basecall_positions <- SInt32(rawBases[1:pos_end])
+  res@basecalls <- paste(sapply(rawBases[(T_end+1):Call_end], RTC), collapse="")
   
-  if(res@header@version > 2.9) {
-    pos_end <- numBases*4
-    A_end <- pos_end + numBases
-    C_end <- A_end + numBases
-    G_end <- C_end + numBases
-    T_end <- G_end + numBases
-    Call_end <- T_end + numBases
-    res@basecall_positions <- SInt32(rawBases[1:pos_end])
-    res@basecalls <- paste(sapply(rawBases[(T_end+1):Call_end], RTC), 
-                           collapse="")
-    
-    #get probabilities
-    res@sequence_probs <- cbind(
-      SInt8(rawBases[(pos_end+1):A_end]),
-      SInt8(rawBases[(A_end+1):C_end]),
-      SInt8(rawBases[(C_end+1):G_end]),
-      SInt8(rawBases[(G_end+1):T_end])
-    )
-  } else {
-    rawBaseMat <- matrix(rawBases, ncol=12, byrow=TRUE)
-    #last 3 columns are empty
-    res@basecall_positions <- apply(rawBaseMat[,1:4], 1, SInt32)
-    res@sequence_probs <- cbind(
-      SInt8(rawBaseMat[,5]),
-      SInt8(rawBaseMat[,6]),
-      SInt8(rawBaseMat[,7]),
-      SInt8(rawBaseMat[,8])
-      )
-    res@basecalls <- paste(RTC(rawBaseMat[,9], multiple=TRUE), collapse="")
-    res@basecalls <- gsub("-", "N", res@basecalls)
-  }
+  #get probabilities
+  res@sequence_probs <- cbind(
+    SInt8(rawBases[(pos_end+1):A_end]),
+    SInt8(rawBases[(A_end+1):C_end]),
+    SInt8(rawBases[(C_end+1):G_end]),
+    SInt8(rawBases[(G_end+1):T_end])
+  )
   
   #Get Comments
   res@comments <- RTC(rawdata[comments_start:comments_end])
