@@ -34,12 +34,10 @@ setMethod("sangerseq", "abif",
     )
     
     basecallpositions1 <- obj@data$PLOC.2 + 1
-    basecalls1 <- subseq(DNAString(obj@data$PBAS.2), start=1, 
-                         width=length(obj@data$PLOC.2))
+    basecalls1 <- DNAString(substr(obj@data$PBAS.2,1,length(obj@data$PLOC.2)))
     basecallpositions2 <- NA
     if(!is.null(obj@data$P2BA.1)) {
-      basecalls2 <- subseq(DNAString(obj@data$P2BA.1), start=1, 
-                           width=length(obj@data$PLOC.2))
+      basecalls2 <- DNAString(substr(obj@data$P2BA.1,1,length(obj@data$PLOC.2)))
     } else {
       basecalls2 <- DNAString("")
     }
