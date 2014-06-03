@@ -1,0 +1,90 @@
+<h3>Overview</h3>
+<img class="framed" src="chromatogram.png" />
+<p>This is a web-based tool to parse Sanger sequencing chromatograms 
+with double peaks into wildtype and alternative allele sequences. Sequencing results 
+parsed by this tool should have a region with single peaks followed by a region 
+with double peaks (see chromatogram above). Sequencing results with more than two peaks, including those
+that occur due to multiple priming will not work. The single peak region 
+is used to align the sequencing results to the provided reference to calculate the 
+appropriate offset. The double peak region is then separated into wildtype and 
+alternative allele sequences and aligned to each other. Both the alternative sequence 
+and the alignment are returned to the user. If you have any questions or problems, please
+email Jonathon Hill at <a href="http://www.google.com/recaptcha/mailhide/d?k=01IL9Uk4-49y9t0hZEOONnxw==&amp;c=wGNqFKkD0swllUMD4ZwClxBSyrGVxp4RWDUsaQHsPGQ=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501IL9Uk4-49y9t0hZEOONnxw\75\75\46c\75wGNqFKkD0swllUMD4ZwClxBSyrGVxp4RWDUsaQHsPGQ\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">j...@genetics.utah.edu</a> (click link to see address).</p>
+
+<h3>Interface</h3>
+<p>All inputs and parameters are set using the panel to the left. There are also three output
+tabs (Instructions, Chromatogram and Results). As each input is entered
+or parameter set, the Chromatogram and results tabs will automatically be updated to reflect the most 
+relevant information. The user can also click on each tab to view any of the information
+he/she would like.</p>
+
+<h3>Results</h3>
+<p>A chromatogram of the sequence data, the reference and alternative alleles and their 
+alignment will be returned to the user. </p>
+
+<h3>Step-by-step Instructions</h3>
+<h4>1. Upload Data:</h4>
+<p>Upload a chromatogram file generated from Sanger (chain termination) sequencing. 
+Sequence data should have a low background with at least 30 bases of single peak region. 
+This region is used to align the sequencing data with the reference sequence. Chromatograms
+of mixed products showing more than two peaks at a single position will not work.
+<strong>Currently, ABIF (.ab1) and SCF (.scf) files are supported. </strong>
+SCF is an open standard and several tools exist to convert other formats to SCF files. </p>
+
+<h4>2. Set Chromatogram Options:</h4>
+<p>After the data is uploaded, a chromatogram will automatically appear, if it does not, 
+click on the "Chromatogram" tab. This chromatogram will update as the following parameters
+are adjusted. </p>
+
+<p><strong>5' Trim</strong></p>
+<p>Number of bases to remove from beginning of sequence data. This parameter should be 
+set so that the low quality reads at the beginning of the sequence have been removed, but
+as much of the remaining sequence as possible is left.</p>
+
+<p><strong>3' Trim</strong></p>
+<p>Number of bases to remove from end of sequence data. This parameter should be 
+set so that the low quality reads at the end of the sequence have been removed. When the 
+sequencing results span an entire PCR product, you will see a region of single peaks after
+the double peak region as a result of one product being longer than the other. This region
+should also be removed.</p>
+
+<p><strong>Show Trimmed Region</strong></p>
+<p>Optionally shows the trimmed regions. Trimmed regions are marked with red lines.</p>
+
+<p><strong>Signal Ratio Cutoff</strong></p>
+<p>A value between 0 and 1. Higher numbers are more stringent. The ratio of the signal for each
+base to the maximum signal is calculated at each position. Only peaks whose ratio is greater
+than the set cutoff are called. Peaks with signals less than this fraction are considered noise. 
+For example, the default value of .33 means that only peaks with signals greater than 1/3 of the 
+max signal ratio are considered. The user should use the live updating chromatogram to set this value 
+below the level of the true peaks, but above the noise. The top row of base calls shows the 
+base with the maximum signal at that position. The second row contains the base calls, 
+including ambiguous bases, for peaks with signals above the set cutoff. These can be used as 
+a guide for setting the parameters. There will likely be a range of numbers 
+that yields the same result. </p>
+
+<h4>3. Enter the Reference Sequence</h4>
+<p>This is the reference allele for the sequenced region. The beginning and end do not have
+to align with the sequencing results, but should preferably encompass the sequenced region.
+For large deletions, the sequenced region may extend far beyond the length of the sequencing
+results, so the downstream region should also be included if this is suspected. Numbers and
+other invalid DNA characters (anything other than A, C, G, T, R, Y, S, W, K, M, B, D, H, V and N) will
+automatically be removed, so sequences can be copied from Genbank or other file types that include
+numbers, spaces, etc.</p>
+
+<h3>Acknowledgements</h3>
+<p><strong>R</strong></p>
+  <p>R Core Team (2013). R: A language and environment for statistical computing. R Foundation for
+  Statistical Computing, Vienna, Austria. URL http://www.R-project.org/.</p>
+
+<p><strong>Biostrings<p></strong>
+  <p>H. Pages, P. Aboyoun, R. Gentleman and S. DebRoy. Biostrings: String objects representing
+  biological sequences, and matching algorithms. R package version 2.30.0.</p>
+
+<p><strong>knitr<p></strong>
+  <p>Yihui Xie (2013). knitr: A general-purpose package for dynamic report generation in R. R
+  package version 1.5.</p>
+
+<p><strong>shiny<p></strong>
+  <p>RStudio and Inc. (2013). shiny: Web Application Framework for R. R package version 0.8.0.
+  http://CRAN.R-project.org/package=shiny</p>

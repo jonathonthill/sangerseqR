@@ -1,0 +1,58 @@
+\documentclass[landscape]{article}
+\usepackage{fullpage}
+\usepackage{pdflscape}
+\usepackage{geometry}
+\usepackage{needspace}
+\geometry{verbose,tmargin=1.8cm,bmargin=1.8cm,lmargin=1.8cm,rmargin=1.8cm}
+
+\begin{document}
+
+<<echo=FALSE>>=
+options(width=120)
+@
+
+\subsection*{Chromatogram}
+<<chromatogram, echo=FALSE, fig.pos="h", fig.height=6.5, fig.width=9.5>>=
+chromatogram(inputdata(), showcalls="both", trim3=input$trim3, 
+                 trim5=input$trim5, width=100, showtrim=input$showtrim, showhets=TRUE, cex.base=2)
+@
+
+\newpage
+
+\subsection*{Alignment}
+% Alignment of \Sexpr{gsub("\\$|_", "\\.", input$seq$name)} sequence data to
+% \Sexpr{inputdata()$note$refname} reference sequence.
+<<alignment_body, tidy=TRUE, echo=FALSE, comment=NA>>=
+align_output = alignchromatogram(inputdata(), 
+                                           trim=input$trimref, 
+                                           refseq=refseq(), 
+                                           trim5=input$trim5, 
+                                           trim3=input$trim3, 
+                                           block.width=80
+                                           )
+align_text = align_output$alignment
+align_head = gsub(pattern="(^.+)#\\n#\\n#={39}.+$",
+                  replacement="\\1",
+                  x=align_text)
+align_body = gsub(pattern="^.*#={39}(.+?)#-{39}.*$",
+                  replacement="\\1",
+                  x=align_text)
+cat(align_body)
+@
+
+\subsection*{Alternative allele}
+<<alternative, tidy=TRUE, echo=FALSE, comment=NA>>=
+cat(wrap_fixed(outputdata()$altseq, width=120))
+@
+
+\subsection*{Reference sequence}
+<<reference, tidy=FALSE, echo=FALSE, comment=NA>>=
+cat(wrap_fixed(outputdata()$refseq, width=120))
+@
+
+\subsection*{Alignment parameters}
+<<align_head, tidy=TRUE, echo=FALSE, comment=NA>>=
+cat(align_head)
+@
+
+\end{document}

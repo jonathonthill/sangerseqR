@@ -1,0 +1,52 @@
+img.framed {
+	border:2px solid lightgrey;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    max-width: 800px;
+}
+
+img.unframed {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+    
+textarea { width: 95% }
+
+.row-fluid {
+    padding-left: 350px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.row-fluid .span4 { 
+    position: relative;
+    float:left;
+    width: 350px;
+    right: 360px;
+    margin-right: -350px;
+}
+.row-fluid .span8 {
+    float: right;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+}
+
+input[type="number"] {
+    width: 80px;
+}
+
+.float-left {
+	float: left;
+	width: 50%;
+}
+
+.float-right {
+	float: right;
+	width: 150px;
+}
