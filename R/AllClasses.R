@@ -1,3 +1,6 @@
+#'@import methods
+#'@import Biostrings
+
 #'@name sangerseq-class
 #'  
 #'@aliases sangerseq
