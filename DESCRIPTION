@@ -6,13 +6,19 @@ Date: 2014-05-21
 Author: Jonathon T. Hill, Bradley Demarest
 Maintainer: Jonathon Hill <jhill@genetics.utah.edu>
 VignetteBuilder: knitr
-Imports: methods, shiny
-Depends: R (>= 3.0.2), Biostrings
-Suggests: BiocStyle, knitr, RUnit, BiocGenerics
+Imports:
+    methods,
+    shiny
+Depends:
+    R (>= 3.0.2),
+    Biostrings
+Suggests:
+    BiocStyle,
+    knitr,
+    RUnit,
+    BiocGenerics
 Description: This package contains several tools for analyzing Sanger
-        Sequencing data files in R, including reading .scf and .ab1
-        files, making basecalls and plotting chromatograms.
+    Sequencing data files in R, including reading .scf and .ab1
+    files, making basecalls and plotting chromatograms.
 License: GPL-2
-Collate: AllClasses.R AllGenerics.R UnExportedFunctions.R
-        ReadFileFunctions.R sangerseqmethods.R PPPfunction.R
 biocViews: Sequencing, SNP, Visualization
