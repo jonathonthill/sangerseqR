@@ -187,6 +187,9 @@ read.abif <- function (filename) {
     res@directory@dataoffset <- c(res@directory@dataoffset, 
                                   SInt32(direntry[21:24]))
   }
+  #fix for error in some .ab1 files that have the wrong data type for the 
+  #PCON fields. Usually is 2 ("character") but should be 1 ("Uint8")
+  res@directory@elementtype[res@directory@name == "PCON"] <- as.integer(1)
 
   #get data list
   res@data <- vector("list", length(res@directory@name))
