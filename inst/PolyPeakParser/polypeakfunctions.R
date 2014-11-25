@@ -47,6 +47,7 @@ cleanstring <- function(string) {
 alignchromatogram <- function(data, block.width=50, trim=FALSE, refseq, trim5, trim3) {
   if (is.null(data)) return(NULL)
   d <- setAllelePhase(data, refseq, trim5, trim3)
+  refseq <- toString(d@primarySeq)
   altseq <- toString(d@secondarySeq)
   if (trim == TRUE) {
     altseq <- toString(d@secondarySeq[(trim5 + 1):(nchar(altseq) - trim3)])
