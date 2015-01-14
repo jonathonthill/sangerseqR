@@ -210,16 +210,8 @@ read.abif <- function (filename) {
     data <- rawdata[debinraw:(debinraw + numelements * elementsize)]
     if (elementtype == 1) 
       res@data[[i]] <- UInt8(data, n = numelements)
-    if (elementtype == 2) {
-      res@data[[i]] <- tryCatch(RTC(data), finally = paste(rawToChar(data, 
-                  multiple = TRUE), collapse = ""), 
-                  error = function(er) {
-                  cat(paste("an error was detected with the following message:",
-                            er, 
-                            " but this error was fixed\n", 
-                            sep = " "))
-                            })
-    }
+    if (elementtype == 2) 
+      res@data[[i]] <- RTC(data)
     if (elementtype == 3) 
       res@data[[i]] <- UInt16(data, n = numelements)
     if (elementtype == 4) 

@@ -32,7 +32,13 @@ basecalldf <- function(obj) {
 
 
 #functions for converting binary data into numbers/text
-RTC <- function(x, ...) suppressWarnings(rawToChar(x, ...))
+RTC <- function(x, ...) {
+  charvec <- suppressWarnings(rawToChar(x, multiple=TRUE))
+  #found that some ab1 files have unallowed characters at the end of the string
+  #this is designed to remove them
+  charvec <- charvec[!is.na(nchar(charvec, allowNA=TRUE))]
+  paste(charvec, collapse="")
+}
 SInt32 <- function(f, n=length(f)/4) readBin(f, what = "integer", 
                                              signed = TRUE, endian = "big", 
                                              size = 4, n=n)
