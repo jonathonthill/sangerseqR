@@ -16,7 +16,10 @@ Jonathon T. Hill, Bradley Demarest
 Maintainer: Jonathon Hill <jhill@genetics.utah.edu>
 }
 \references{
-Hill et al. (submitted)
+  Jonathon T Hill, Bradley L Demarest, Brent W Bisgrove, Yi-chu Su, Megan Smith and H. Joseph
+  Yost (2014). Poly peak parser: Method and software for identification of unknown indels
+  using sanger sequencing of polymerase chain reaction products. Developmental Dynamics
+  243:1632-1636
 }
 \seealso{
 Biostrings
