@@ -39,9 +39,14 @@ setMethod("sangerseq", "abif",
     basecalls1 <- paste0(basecalls1[basecalls1 %in% DNA_ALPHABET], 
                          collapse = "")
     if (nchar(basecalls1) != nchar(obj@data$PBAS.2)) {
-      warning("Invalid characters removed from primary basecalls. 
-              Please check chromatogram.")
+      warning("Invalid characters removed from primary basecalls. This may result
+                in basecalls being shifted. Please check chromatogram.")
     }
+    #Appears normal to have them not match
+    #if (nchar(basecalls1) != length(obj@data$PLOC.2)) {
+    #  warning("Number of primary basecalls does not match the number of peaks. Please
+    #          check chromatogram.")
+    #}
 
     basecalls1 <- DNAString(substr(basecalls1,1,length(obj@data$PLOC.2)))
     basecallpositions1 <- obj@data$PLOC.2 + 1
@@ -50,9 +55,14 @@ setMethod("sangerseq", "abif",
       basecalls2 <- paste0(basecalls2[basecalls2 %in% DNA_ALPHABET], 
                            collapse = "")
       if (nchar(basecalls2) != nchar(obj@data$P2BA.1)) {
-        warning("Invalid characters removed from secondary basecalls. 
-              Please check chromatogram.")
+        warning("Invalid characters removed from secondary basecalls. This may 
+                result in basecalls being shifted. Please check chromatogram.")
       }
+      #Appears normal to have them not match
+      #if (nchar(basecalls2) != length(obj@data$PLOC.2)) {
+      #  warning("Number of secondary basecalls does not match the number of peaks. Please
+      #        check chromatogram.")
+      #}
       basecalls2 <- DNAString(substr(basecalls2,1,length(obj@data$PLOC.2)))
       basecallpositions2 <-obj@data$PLOC.2 + 1
     } else {

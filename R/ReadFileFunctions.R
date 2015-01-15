@@ -103,7 +103,7 @@ read.scf <- function (filename)
       SInt8(rawBaseMat[,7]),
       SInt8(rawBaseMat[,8])
       )
-    res@basecalls <- paste(RTC(rawBaseMat[,9], multiple=TRUE), collapse="")
+    res@basecalls <- RTC(rawBaseMat[,9], multiple=TRUE)
     res@basecalls <- gsub("-", "N", res@basecalls)
   }
   
