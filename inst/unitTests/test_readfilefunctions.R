@@ -29,14 +29,21 @@ test_readfilefunctions <- function() {
     system.file("testData", "heterozygousabif.rds", package="sangerseqR"))
   expectedscf <- readRDS(
     system.file("testData", "heterozygousscf.rds", package="sangerseqR"))
+  #contains unprintable characters
+  expectednoprintabif <- readRDS(
+    system.file("testData", "noprintabif.rds", package="sangerseqR"))
+  
   abif <- readsangerseq(
     system.file("extdata", "heterozygous.ab1", package="sangerseqR"))
   scf <- readsangerseq(
     system.file("extdata", "heterozygous.scf", package="sangerseqR"))
+  noprintabif <- readsangerseq(
+    system.file("extdata", "noprintabif.ab1", package="sangerseqR"))
   
   #Check if objects are the same
   checkEquals(abif, expectedabif)
   checkEquals(scf, expectedscf)
+  checkEquals(noprintabif, expectednoprintabif)
 }
 
 
