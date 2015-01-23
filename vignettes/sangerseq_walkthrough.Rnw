@@ -60,9 +60,11 @@ The objects and functions included in this package were developed as part of the
 Poly Peak Parser web application 
 (\url{http://yost.genetics.utah.edu/software.php}), which automates the process 
 of seperating ambiguous double peaks from Sanger sequencing individuals 
-containing heterozygous indels. However, because they have broader utility than 
-is available in the web application, they are provided in this package for 
-general use in R.
+containing heterozygous indels. This package contains a complete working copy of 
+the Poly Peak Parser web application that can be run locally using the 
+\Rfunction{PolyPeakParser} function. In addition to the web program, this package
+also provides general objects and functions for working with Sanger sequencing
+data. 
 
 This vignette will walk you through a typical workflow using two sequence files:
 1) homozygous.scf and 2) heterozygous.ab1. As their names indicate, the first 
