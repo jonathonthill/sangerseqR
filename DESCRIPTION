@@ -1,7 +1,7 @@
 Package: sangerseqR
 Type: Package
 Title: Tools for Sanger Sequencing Data in R
-Version: 1.23.0
+Version: 1.24.0
 Date: 2014-07-17
 Author: Jonathon T. Hill, Bradley Demarest
 Maintainer: Jonathon Hill <jhill@byu.edu>
