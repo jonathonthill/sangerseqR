@@ -1,6 +1,6 @@
 getpeaks <- function(trace) {
   r <- rle(trace)
-  indexes <- which(rep(diff(sign(diff(c(-Inf, r$values, -Inf)))) == -2, 
+  indexes <- which(rep(diff(sign(diff(c(-Inf, r$values, -Inf)))) == -2,
                        times = r$lengths))
   cbind(indexes, trace[indexes])
 }
@@ -15,25 +15,25 @@ peakvalues <- function(x, pstart, pstop) {
 basecalldf <- function(obj) {
   primary <- strsplit(toupper(primarySeq(obj, string=TRUE)), "")[[1]]
   secondary <- strsplit(toupper(secondarySeq(obj, string=TRUE)), "")[[1]]
-  basecalls <- data.frame(primary=primary, 
-                          secondary=secondary, 
+  basecalls <- data.frame(primary=primary,
+                          secondary=secondary,
                           stringsAsFactors=FALSE)
   basecalls$primary <- unname(IUPAC_CODE_MAP[basecalls$primary])
   basecalls$secondary <- unname(IUPAC_CODE_MAP[basecalls$secondary])
   basecalls$consensus <- basecalls$primary
-  basecalls$consensus[basecalls$primary != basecalls$secondary 
+  basecalls$consensus[basecalls$primary != basecalls$secondary
                       | nchar(basecalls$consensus) > 1] <- "N"
   basecalls$possibilities <- basecalls$consensus
-  basecalls$possibilities[basecalls$possibilities == "N"] <- 
-    paste0(basecalls$primary[basecalls$possibilities == "N"], 
+  basecalls$possibilities[basecalls$possibilities == "N"] <-
+    paste0(basecalls$primary[basecalls$possibilities == "N"],
            basecalls$secondary[basecalls$possibilities == "N"])
   return(basecalls)
 }
 
 
 #functions for converting binary data into numbers/text
-RTC <- function(x, ...) {
-  string <- suppressWarnings(rawToChar(x, ...))
+RTC <- function(x, multiple = TRUE, ...) {
+  string <- suppressWarnings(rawToChar(x, multiple, ...))
   if(length(string) > 1) string <- paste(string, collapse="")
   #found that some ab1 files have unprinted characters at the end of the string
   #this is designed to remove them
@@ -41,21 +41,21 @@ RTC <- function(x, ...) {
   return(string)
 }
 
-SInt32 <- function(f, n=length(f)/4) readBin(f, what = "integer", 
-                                             signed = TRUE, endian = "big", 
+SInt32 <- function(f, n=length(f)/4) readBin(f, what = "integer",
+                                             signed = TRUE, endian = "big",
                                              size = 4, n=n)
-SInt16 <- function(f, n=length(f)/2) readBin(f, what = "integer", 
-                                             signed = TRUE, endian = "big", 
+SInt16 <- function(f, n=length(f)/2) readBin(f, what = "integer",
+                                             signed = TRUE, endian = "big",
                                              size = 2, n=n)
-SInt8 <- function(f, n=length(f)) readBin(f, what = "integer", signed = TRUE, 
+SInt8 <- function(f, n=length(f)) readBin(f, what = "integer", signed = TRUE,
                                   endian = "big", size = 1, n=n)
-UInt32 <- function(f, n=length(f)/4) readBin(f, what = "integer", 
-                                             signed = FALSE, endian = "big", 
+UInt32 <- function(f, n=length(f)/4) readBin(f, what = "integer",
+                                             signed = FALSE, endian = "big",
                                              size = 4, n=n)
 UInt16 <- function(f, n=length(f)/2) readBin(f, what = "integer",
-                                             signed = FALSE, endian = "big", 
+                                             signed = FALSE, endian = "big",
                                              size = 2, n=n)
-UInt8 <- function(f, n=length(f)) readBin(f, what = "integer", signed = FALSE, 
+UInt8 <- function(f, n=length(f)) readBin(f, what = "integer", signed = FALSE,
                                   endian = "big", size = 1, n=n)
 f32 <- function(f, n=length(f)/4) readBin(f, what = "numeric", size = 4, n=n)
 f64 <- function(f, n=length(f)/8) readBin(f, what = "numeric", size = 8, n=n)
