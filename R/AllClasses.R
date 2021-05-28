@@ -95,7 +95,7 @@ setClass("abifHeader",
          representation(
            abif="character",
            version="integer",
-           name="raw",
+           name="character",
            number="integer",
            elementtype="integer",
            elementsize="integer",
