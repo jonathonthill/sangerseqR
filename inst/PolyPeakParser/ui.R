@@ -18,7 +18,7 @@ shinyUI(pageWithSidebar(
     checkboxInput('example', tags$span(style="color: red", 'Load Example Data'), FALSE),
     tags$h4('2. Set Chromatogram Options:'),
     helpText(tags$small("Note: Chromatogram will update live to reflect changes.")),
-    sliderInput("x", strong("Approx. number of bases per row"), 10, 200, 100, 10, format=" ", ticks=FALSE),
+    sliderInput("x", strong("Approx. number of bases per row"), 10, 200, 100, 10, ticks=FALSE),
     helpText(tags$small("Higher numbers fit more peaks on a single line.")),
     tags$div(class="float-left", numericInput("trim5", strong("5' Trim"), '30')),
     tags$div(class="float-left", numericInput("trim3", strong("3' Trim"), '30')),
