@@ -33,6 +33,7 @@ basecalldf <- function(obj) {
 
 
 #functions for converting binary data into numbers/text
+#' @importFrom stringr str_replace
 
 RTC <- function(x, multiple = TRUE, ...) {
   string <- suppressWarnings(rawToChar(x, multiple, ...))
