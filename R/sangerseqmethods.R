@@ -35,34 +35,29 @@ setMethod("sangerseq", "abif",
     
 
     #check for valid chars
-    basecalls1 <- strsplit(obj@data$PBAS.2, "")[[1]]
-    basecalls1 <- paste0(basecalls1[basecalls1 %in% DNA_ALPHABET], 
-                         collapse = "")
-    if (nchar(basecalls1) != nchar(obj@data$PBAS.2)) {
+    basecalls1_old <- strsplit(obj@data$PBAS.2, "")[[1]]
+    basecalls1_new <- basecalls1_old[basecalls1_old %in% DNA_ALPHABET]
+    
+    if (length(basecalls1_old) != length(basecalls1_new)) {
       warning("Invalid characters removed from primary basecalls. This may result
                 in basecalls being shifted. Please check chromatogram.")
     }
-    #Appears normal to have them not match
-    #if (nchar(basecalls1) != length(obj@data$PLOC.2)) {
-    #  warning("Number of primary basecalls does not match the number of peaks. Please
-    #          check chromatogram.")
-    #}
-
+    basecalls1 <- paste0(basecalls1_new, collapse = "")
+    
+    # number of locations and calls do not always match
     basecalls1 <- DNAString(substr(basecalls1,1,length(obj@data$PLOC.2)))
     basecallpositions1 <- obj@data$PLOC.2 + 1
     if(!is.null(obj@data$P2BA.1)) {
-      basecalls2 <- strsplit(obj@data$P2BA.1, "")[[1]]
-      basecalls2 <- paste0(basecalls2[basecalls2 %in% DNA_ALPHABET], 
-                           collapse = "")
-      if (nchar(basecalls2) != nchar(obj@data$P2BA.1)) {
-        warning("Invalid characters removed from secondary basecalls. This may 
-                result in basecalls being shifted. Please check chromatogram.")
+      basecalls2_old <- strsplit(obj@data$P2BA.1, "")[[1]]
+      basecalls2_new <- basecalls2_old[basecalls2_old %in% DNA_ALPHABET]
+      
+      if (length(basecalls2_old) != length(basecalls2_new)) {
+        warning("Invalid characters removed from primary basecalls. This may result
+                in basecalls being shifted. Please check chromatogram.")
       }
-      #Appears normal to have them not match
-      #if (nchar(basecalls2) != length(obj@data$PLOC.2)) {
-      #  warning("Number of secondary basecalls does not match the number of peaks. Please
-      #        check chromatogram.")
-      #}
+      basecalls2 <- paste0(basecalls2_new, collapse = "")
+      
+      # number of locations and calls do not always match
       basecalls2 <- DNAString(substr(basecalls2,1,length(obj@data$PLOC.2)))
       basecallpositions2 <-obj@data$PLOC.2 + 1
     } else {

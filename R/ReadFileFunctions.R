@@ -158,7 +158,7 @@ read.abif <- function (filename) {
     stop("file not in ABIF format")
   
   res@header@version <- SInt16(rawdata[5:6])
-  res@header@name <- rawdata[7:10]
+  res@header@name <- RTC(rawdata[7:10])
   res@header@number <- SInt32(rawdata[11:14])
   res@header@elementtype <- SInt16(rawdata[15:16])
   res@header@elementsize <- SInt16(rawdata[17:18])

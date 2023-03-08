@@ -1,6 +1,6 @@
 getpeaks <- function(trace) {
   r <- rle(trace)
-  indexes <- which(rep(diff(sign(diff(c(-Inf, r$values, -Inf)))) == -2, 
+  indexes <- which(rep(diff(sign(diff(c(-Inf, r$values, -Inf)))) == -2,
                        times = r$lengths))
   cbind(indexes, trace[indexes])
 }
@@ -15,6 +15,7 @@ peakvalues <- function(x, pstart, pstop) {
 basecalldf <- function(obj) {
   primary <- strsplit(toupper(primarySeq(obj, string=TRUE)), "")[[1]]
   secondary <- strsplit(toupper(secondarySeq(obj, string=TRUE)), "")[[1]]
+
   basecalls <- data.frame(primary=primary, 
                           secondary=secondary, 
                           stringsAsFactors=FALSE)
@@ -32,10 +33,9 @@ basecalldf <- function(obj) {
 
 
 #functions for converting binary data into numbers/text
-#' @import stringr
 
-RTC <- function(x, ...) {
-  string <- suppressWarnings(rawToChar(x, ...))
+RTC <- function(x, multiple = TRUE, ...) {
+  string <- suppressWarnings(rawToChar(x, multiple, ...))
   if(length(string) > 1) string <- paste(string, collapse="")
   #found that some ab1 files have unprinted characters at the end of the string
   #this is designed to remove them
