@@ -33,12 +33,13 @@ basecalldf <- function(obj) {
 
 
 #functions for converting binary data into numbers/text
+
 RTC <- function(x, multiple = TRUE, ...) {
   string <- suppressWarnings(rawToChar(x, multiple, ...))
   if(length(string) > 1) string <- paste(string, collapse="")
   #found that some ab1 files have unprinted characters at the end of the string
   #this is designed to remove them
-  string <- gsub("[^ -~]", "", string)
+  string <- str_replace(string, "[^[:alnum:]]", "")
   return(string)
 }
 

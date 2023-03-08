@@ -32,7 +32,7 @@ read.scf <- function (filename)
   #Get Header
   res@header@scf <- RTC(rawdata[1:4])
   
-  if (res@header@scf != ".scf") 
+  if (res@header@scf != "scf") 
     stop("file not in SCF format")
   
   res@header@samples <- SInt32(rawdata[5:8])

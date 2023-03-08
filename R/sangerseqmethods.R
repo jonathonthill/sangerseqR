@@ -27,10 +27,10 @@ setMethod("sangerseq", "abif",
                             obj@data$DATA.11, 
                             obj@data$DATA.12), 
                           ncol=4)
-    orderedmatrix <- cbind(tracematrix[,regexpr("A", obj@data$FWO_.1)[1]],
-                           tracematrix[,regexpr("C", obj@data$FWO_.1)[1]],
-                           tracematrix[,regexpr("G", obj@data$FWO_.1)[1]],
-                           tracematrix[,regexpr("T", obj@data$FWO_.1)[1]]
+    orderedmatrix <- cbind(tracematrix[,regexpr("A", obj@data$FWO.1)[1]],
+                           tracematrix[,regexpr("C", obj@data$FWO.1)[1]],
+                           tracematrix[,regexpr("G", obj@data$FWO.1)[1]],
+                           tracematrix[,regexpr("T", obj@data$FWO.1)[1]]
     )
     
 
@@ -180,6 +180,10 @@ setMethod("makeBaseCalls", "sangerseq",
 )
 
 #' @rdname chromatogram
+#' @importFrom grDevices dev.off pdf
+#' @importFrom graphics axis lines mtext par rect
+#' @importFrom stats IQR quantile
+
 setMethod("chromatogram", "sangerseq", 
   function(obj, trim5=0, trim3=0, 
            showcalls=c("primary", "secondary", "both", "none"), 
