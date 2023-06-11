@@ -303,7 +303,7 @@ setMethod("chromatogram", "sangerseq",
     }
     if(!is.null(filename)) {
       dev.off()
-      cat(paste("Chromatogram saved to", filename, 
+      message(paste("Chromatogram saved to", filename, 
                 "in the current working directory"))
     }
     else par(originalpar)
